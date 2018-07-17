@@ -5,7 +5,7 @@ module Train::Platforms::Detect::Specifications
     def self.load
       plat = Train::Platforms
 
-      plat.family('api')
+      plat.family('api').detect { true }
 
       plat.family('cloud').in_family('api')
       plat.name('aws').in_family('cloud')
@@ -15,6 +15,8 @@ module Train::Platforms::Detect::Specifications
 
       plat.family('iaas').in_family('api')
       plat.name('oneview').in_family('iaas')
+      plat.family('device').in_family('api').detect { true }
+      plat.name('panos').title('Palo Alto').in_family('device').detect { true }
     end
   end
 end
